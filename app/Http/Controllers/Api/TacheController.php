@@ -12,10 +12,7 @@ use Illuminate\Http\Response;
 
 class TacheController extends BaseController
 {
-    public function __construct()
-    {
-        $this->middleware('ability:tache:view,tache:create,tache:update,tache:delete,tache:assign');
-    }
+  
 
     public function index()
     {
