@@ -119,12 +119,12 @@ class CongeController extends BaseController
 
     public function approve(Conge $conge)
     {
-        // if ($conge->statut !== 'en_attente') {
-        //     return $this->sendError(
-        //         'Seuls les congés en attente peuvent être approuvés',
-        //         Response::HTTP_BAD_REQUEST
-        //     );
-        // }
+        if ($conge->statut !== 'en_attente') {
+            return $this->sendError(
+                'Seuls les congés en attente peuvent être approuvés',
+                Response::HTTP_BAD_REQUEST
+            );
+        }
 
         // Vérifier le solde de congé
         $soldeRestant = $conge->employe->solde_conge - $conge->duree;
