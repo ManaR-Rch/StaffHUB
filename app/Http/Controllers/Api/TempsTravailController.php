@@ -93,7 +93,15 @@ class TempsTravailController extends BaseController
 
     public function stats()
     {
-       
+        $user = auth()->user();
+        $query = TempsTravail::query();
+
+        if ($user->role === 'employe') {
+            $query->where('employe_id', $user->employe->id);
+        } elseif ($employeId = request('employe_id')) {
+            $query->where('employe_id', $employeId);
+        }
+
      
         $stats = $query->selectRaw('
             YEAR(date) as annee,
