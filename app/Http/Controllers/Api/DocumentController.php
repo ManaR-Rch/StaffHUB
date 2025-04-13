@@ -24,11 +24,11 @@ class DocumentController extends BaseController
         $user = auth()->user();
         $query = Document::query()->with('employe.utilisateur');
 
-        if ($user->role === 'employe') {
-            $query->where('employe_id', $user->employe->id);
-        } elseif ($employeId = request('employe_id')) {
-            $query->where('employe_id', $employeId);
-        }
+        // if ($user->role === 'employe') {
+        //     $query->where('employe_id', $user->employe->id);
+        // } elseif ($employeId = request('employe_id')) {
+        //     $query->where('employe_id', $employeId);
+        // }
 
         $documents = $query->filter()->paginate(10);
 
