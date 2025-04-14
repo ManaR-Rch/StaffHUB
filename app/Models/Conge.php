@@ -6,18 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Conge extends Model
 {
-    protected $fillable = [
-        'employe_id',
-        'date_debut',
-        'date_fin',
-        'type',
-        'statut',
-        'duree',
-        'solde_restant',
-        'commentaire_manager',
-        'approved_by',
-        'approved_at'
-    ];
+  
 
     protected $casts = [
         'date_debut' => 'date',
