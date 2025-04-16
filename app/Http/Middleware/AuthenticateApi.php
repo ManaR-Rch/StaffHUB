@@ -1,6 +1,5 @@
 <?php
 
-// app/Http/Middleware/AuthenticateApi.php
 namespace App\Http\Middleware;
 
 use Closure;
