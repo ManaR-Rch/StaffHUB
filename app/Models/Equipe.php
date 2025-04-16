@@ -14,7 +14,6 @@ class Equipe extends Model
         'date_affectation'
     ];
 
-    // Relations
     public function manager()
     {
         return $this->belongsTo(Employe::class, 'manager_id');
