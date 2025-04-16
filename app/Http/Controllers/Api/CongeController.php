@@ -24,7 +24,6 @@ class CongeController extends BaseController
         $user = auth()->user();
         $query = Conge::query()->with('employe.utilisateur');
 
-        // Filtrage selon le rôle
         if ($user->role === 'employe') {
             $query->where('employe_id', $user->employe->id);
         } elseif ($user->role === 'manager') {
@@ -33,7 +32,6 @@ class CongeController extends BaseController
             });
         }
 
-        // Filtres supplémentaires
         if ($employeId = request('employe_id')) {
             $query->where('employe_id', $employeId);
         }
@@ -58,7 +56,7 @@ class CongeController extends BaseController
         $validated['employe_id'] = $validated['employe_id'] ?? auth()->user()->employe->id;
         $validated['statut'] = 'en_attente';
 
-        // Calcul de la durée
+
         $dateDebut = Carbon::parse($validated['date_debut']);
         $dateFin = Carbon::parse($validated['date_fin']);
         $validated['duree'] = $dateDebut->diffInDays($dateFin) + 1;
@@ -82,7 +80,7 @@ class CongeController extends BaseController
 
     public function update(UpdateCongeRequest $request, Conge $conge)
     {
-        // Vérification des autorisations
+
         if ($request->has('statut') && !auth()->user()->tokenCan('conge:approve')) {
             return $this->sendError(
                 'Non autorisé à modifier le statut',
@@ -92,7 +90,7 @@ class CongeController extends BaseController
 
         $validated = $request->validated();
         
-        // Si les dates changent, recalculer la durée
+
         if ($request->has(['date_debut', 'date_fin'])) {
             $dateDebut = Carbon::parse($validated['date_debut']);
             $dateFin = Carbon::parse($validated['date_fin']);
@@ -126,7 +124,7 @@ class CongeController extends BaseController
             );
         }
 
-        // Vérifier le solde de congé
+     
         $soldeRestant = $conge->employe->solde_conge - $conge->duree;
         if ($soldeRestant < 0) {
             return $this->sendError(
@@ -140,7 +138,7 @@ class CongeController extends BaseController
             'solde_restant' => $soldeRestant,
         ]);
 
-        // TODO: Envoyer une notification
+
 
         return $this->sendResponse(
             new CongeResource($conge->load('employe.utilisateur')),
@@ -161,7 +159,7 @@ class CongeController extends BaseController
             'statut' => 'rejete',
         ]);
 
-        // TODO: Envoyer une notification
+
 
         return $this->sendResponse(
             new CongeResource($conge->load('employe.utilisateur')),
