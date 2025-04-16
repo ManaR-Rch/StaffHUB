@@ -34,8 +34,7 @@ class EmployeController extends BaseController
     public function store(StoreEmployeRequest $request)
     {
         $validated = $request->validated();
-        
-        // Création de l'utilisateur
+
         $password = Str::random(10);
         $utilisateur = Utilisateur::create([
             'nom' => $validated['nom'],
@@ -45,7 +44,6 @@ class EmployeController extends BaseController
             'role' => 'employe',
         ]);
 
-        // Création de l'employé
         $employe = Employe::create([
             'utilisateur_id' => $utilisateur->id,
             'date_naissance' => $validated['date_naissance'],
@@ -56,7 +54,7 @@ class EmployeController extends BaseController
             'numero_employe' => 'EMP' . str_pad($utilisateur->id, 5, '0', STR_PAD_LEFT),
         ]);
 
-        // TODO: Envoyer un email avec les identifiants
+
 
         return $this->sendResponse(
             new EmployeResource($employe->load('utilisateur')),
@@ -77,14 +75,13 @@ class EmployeController extends BaseController
     {
         $validated = $request->validated();
 
-        // Mise à jour de l'utilisateur
         $employe->utilisateur->update([
             'nom' => $validated['nom'],
             'prenom' => $validated['prenom'],
             'email' => $validated['email'],
         ]);
 
-        // Mise à jour de l'employé
+
         $employe->update([
             'date_naissance' => $validated['date_naissance'],
             'poste' => $validated['poste'],
