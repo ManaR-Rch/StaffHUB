@@ -21,7 +21,7 @@ class Paie extends Model
         'validated_at'
     ];
 
-    // Relations
+
     public function employe()
     {
         return $this->belongsTo(Employe::class);
