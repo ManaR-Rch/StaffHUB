@@ -20,7 +20,6 @@ class TempsTravail extends Model
         'notes'
     ];
 
-    // Relations
     public function employe()
     {
         return $this->belongsTo(Employe::class);
