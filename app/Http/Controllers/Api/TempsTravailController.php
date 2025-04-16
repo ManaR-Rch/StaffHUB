@@ -50,7 +50,7 @@ class TempsTravailController extends BaseController
         $validated = $request->validated();
         $validated['employe_id'] = $validated['employe_id'] ?? auth()->user()->employe->id;
 
-        // Calcul des heures travaillées
+    
         $heureDebut = Carbon::parse($validated['heure_debut']);
         $heureFin = Carbon::parse($validated['heure_fin']);
         $validated['total_heures'] = $heureDebut->diffInHours($heureFin) + $heureDebut->diffInMinutes($heureFin) % 60 / 60;
@@ -76,7 +76,7 @@ class TempsTravailController extends BaseController
     {
         $validated = $request->validated();
 
-        // Recalcul si les heures changent
+ 
         if ($request->has(['heure_debut', 'heure_fin'])) {
             $heureDebut = Carbon::parse($validated['heure_debut']);
             $heureFin = Carbon::parse($validated['heure_fin']);
