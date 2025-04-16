@@ -12,4 +12,5 @@
 
     <a href="{{ route('conges.index') }}" class="btn btn-secondary">Retour</a>
 </div>
+@endsection
 
