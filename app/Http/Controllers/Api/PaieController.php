@@ -47,7 +47,7 @@ class PaieController extends BaseController
     {
         $validated = $request->validated();
         
-        // Calcul du salaire net
+     
         $salaireNet = $validated['salaire_base'] 
                      + $validated['primes'] 
                      - $validated['deductions'];
@@ -88,7 +88,7 @@ class PaieController extends BaseController
             );
         }
 
-        // Recalcul si les valeurs changent
+
         if ($request->hasAny(['salaire_base', 'primes', 'deductions'])) {
             $validated['salaire_net'] = $validated['salaire_base'] 
                                        + $validated['primes'] 
@@ -133,7 +133,6 @@ class PaieController extends BaseController
             );
         }
 
-        // Génération du PDF
         $pdf = Pdf::loadView('paies.pdf', ['paie' => $paie]);
         $filename = 'paie_' . $paie->employe->numero_employe . '_' . $paie->mois . '.pdf';
         $path = 'paies/' . $filename;
@@ -146,7 +145,7 @@ class PaieController extends BaseController
             'date_validation' => now(),
         ]);
 
-        // TODO: Envoyer un email avec la fiche de paie
+        
 
         return $this->sendResponse(
             new PaieResource($paie->load('employe.utilisateur')),
