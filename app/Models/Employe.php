@@ -22,7 +22,7 @@ class Employe extends Model
 
     protected $dates = ['deleted_at'];
 
-    // Relations
+   
     public function utilisateur()
     {
         return $this->belongsTo(Utilisateur::class);
