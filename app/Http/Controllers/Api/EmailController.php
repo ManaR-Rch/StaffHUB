@@ -42,7 +42,7 @@ class EmailController extends BaseController
     {
         $validated = $request->validated();
         
-        // Envoi de l'email
+      
         $destinataire = Employe::find($validated['destinataire_id']);
         
         Mail::to($destinataire->utilisateur->email)
@@ -51,7 +51,6 @@ class EmailController extends BaseController
                 $validated['message']
             ));
 
-        // Enregistrement en base
         $email = Email::create([
             'destinataire_id' => $validated['destinataire_id'],
             'sujet' => $validated['sujet'],
