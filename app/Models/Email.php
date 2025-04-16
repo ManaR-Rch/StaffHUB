@@ -16,7 +16,7 @@ class Email extends Model
         'read_at'
     ];
 
-    // Relations
+
     public function expediteur()
     {
         return $this->belongsTo(Utilisateur::class, 'from_user_id');

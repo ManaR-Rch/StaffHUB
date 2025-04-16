@@ -16,7 +16,7 @@ class Document extends Model
         'description'
     ];
 
-    // Relations
+
     public function employe()
     {
         return $this->belongsTo(Employe::class);
