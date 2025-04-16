@@ -80,7 +80,7 @@ class TacheController extends BaseController
 
         return $this->sendResponse(
             [],
-            'Tâche supprimée avec succès'
+            'Tâche supprimée succès'
         );
     }
 
