@@ -19,7 +19,6 @@ class Tache extends Model
 
     protected $dates = ['date_echeance'];
 
-    // Relations
     public function createur()
     {
         return $this->belongsTo(Utilisateur::class, 'created_by');
