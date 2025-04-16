@@ -16,7 +16,6 @@ class Absence extends Model
         'commentaire'
     ];
 
-    // Relations
     public function employe()
     {
         return $this->belongsTo(Employe::class);

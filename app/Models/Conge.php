@@ -25,7 +25,6 @@ class Conge extends Model
         'approved_at' => 'datetime'
     ];
 
-    // Relations
     public function employe()
     {
         return $this->belongsTo(Employe::class);
@@ -36,7 +35,7 @@ class Conge extends Model
         return $this->belongsTo(Utilisateur::class, 'approved_by');
     }
 
-    // Scopes
+
     public function scopeEnAttente($query)
     {
         return $query->where('statut', 'en_attente');
